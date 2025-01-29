@@ -568,8 +568,11 @@ class UnixConsole(Console):
             import posix
         except ImportError:
             return None
-        if posix._is_inputhook_installed():
-            return posix._inputhook
+        try:
+            if posix._is_inputhook_installed():
+                return posix._inputhook
+        except AttributeError:
+            return None
 
     def __enable_bracketed_paste(self) -> None:
         os.write(self.output_fd, b"\x1b[?2004h")
