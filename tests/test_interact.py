@@ -6,8 +6,8 @@ from textwrap import dedent
 
 from test.support import force_not_colorized
 
-from _pyrepl.console import InteractiveColoredConsole
-from _pyrepl.simple_interact import _more_lines
+from repllib.console import InteractiveColoredConsole
+from repllib.simple_interact import _more_lines
 
 class TestSimpleInteract(unittest.TestCase):
     def test_multiple_statements(self):

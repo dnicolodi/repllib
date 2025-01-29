@@ -4,9 +4,9 @@ from functools import partial
 from typing import Iterable
 from unittest.mock import MagicMock
 
-from _pyrepl.console import Console, Event
-from _pyrepl.readline import ReadlineAlikeReader, ReadlineConfig
-from _pyrepl.simple_interact import _strip_final_indent
+from repllib.console import Console, Event
+from repllib.readline import ReadlineAlikeReader, ReadlineConfig
+from repllib.simple_interact import _strip_final_indent
 
 
 def multiline_input(reader: ReadlineAlikeReader, namespace: dict | None = None):

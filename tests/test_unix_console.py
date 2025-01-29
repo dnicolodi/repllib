@@ -8,8 +8,8 @@ from unittest.mock import MagicMock, call, patch, ANY
 from .support import handle_all_events, code_to_events
 
 try:
-    from _pyrepl.console import Event
-    from _pyrepl.unix_console import UnixConsole
+    from repllib.console import Event
+    from repllib.unix_console import UnixConsole
 except ImportError:
     pass
 
@@ -74,12 +74,12 @@ TERM_CAPABILITIES = {
 
 
 @unittest.skipIf(sys.platform == "win32", "No Unix event queue on Windows")
-@patch("_pyrepl.curses.tigetstr", lambda s: TERM_CAPABILITIES.get(s))
+@patch("repllib.curses.tigetstr", lambda s: TERM_CAPABILITIES.get(s))
 @patch(
-    "_pyrepl.curses.tparm",
+    "repllib.curses.tparm",
     lambda s, *args: s + b":" + b",".join(str(i).encode() for i in args),
 )
-@patch("_pyrepl.curses.setupterm", lambda a, b: None)
+@patch("repllib.curses.setupterm", lambda a, b: None)
 @patch(
     "termios.tcgetattr",
     lambda _: [

@@ -1,7 +1,7 @@
 import string
 import unittest
 
-from _pyrepl.keymap import _keynames, _escapes, parse_keys, compile_keymap, KeySpecError
+from repllib.keymap import _keynames, _escapes, parse_keys, compile_keymap, KeySpecError
 
 
 class TestParseKeys(unittest.TestCase):

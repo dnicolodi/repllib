@@ -4,13 +4,13 @@ import sys
 from unittest.mock import patch
 
 try:
-    from _pyrepl.console import Event
-    from _pyrepl.unix_eventqueue import EventQueue
+    from repllib.console import Event
+    from repllib.unix_eventqueue import EventQueue
 except ImportError:
     pass
 
 @unittest.skipIf(sys.platform == "win32", "No Unix event queue on Windows")
-@patch("_pyrepl.curses.tigetstr", lambda x: b"")
+@patch("repllib.curses.tigetstr", lambda x: b"")
 class TestUnixEventQueue(unittest.TestCase):
     def setUp(self):
         self.file = tempfile.TemporaryFile()
@@ -42,7 +42,7 @@ class TestUnixEventQueue(unittest.TestCase):
         eq.insert(event)
         self.assertEqual(eq.events[0], event)
 
-    @patch("_pyrepl.unix_eventqueue.keymap")
+    @patch("repllib.unix_eventqueue.keymap")
     def test_push_with_key_in_keymap(self, mock_keymap):
         mock_keymap.compile_keymap.return_value = {"a": "b"}
         eq = EventQueue(self.file.fileno(), "utf-8")
@@ -52,7 +52,7 @@ class TestUnixEventQueue(unittest.TestCase):
         self.assertEqual(eq.events[0].evt, "key")
         self.assertEqual(eq.events[0].data, "b")
 
-    @patch("_pyrepl.unix_eventqueue.keymap")
+    @patch("repllib.unix_eventqueue.keymap")
     def test_push_without_key_in_keymap(self, mock_keymap):
         mock_keymap.compile_keymap.return_value = {"a": "b"}
         eq = EventQueue(self.file.fileno(), "utf-8")
@@ -62,7 +62,7 @@ class TestUnixEventQueue(unittest.TestCase):
         self.assertEqual(eq.events[0].evt, "key")
         self.assertEqual(eq.events[0].data, "a")
 
-    @patch("_pyrepl.unix_eventqueue.keymap")
+    @patch("repllib.unix_eventqueue.keymap")
     def test_push_with_keymap_in_keymap(self, mock_keymap):
         mock_keymap.compile_keymap.return_value = {"a": "b"}
         eq = EventQueue(self.file.fileno(), "utf-8")
@@ -77,7 +77,7 @@ class TestUnixEventQueue(unittest.TestCase):
         self.assertEqual(eq.events[1].evt, "key")
         self.assertEqual(eq.events[1].data, "d")
 
-    @patch("_pyrepl.unix_eventqueue.keymap")
+    @patch("repllib.unix_eventqueue.keymap")
     def test_push_with_keymap_in_keymap_and_escape(self, mock_keymap):
         mock_keymap.compile_keymap.return_value = {"a": "b"}
         eq = EventQueue(self.file.fileno(), "utf-8")

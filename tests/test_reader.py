@@ -6,8 +6,8 @@ from unittest.mock import MagicMock, patch
 
 from .support import handle_all_events, handle_events_narrow_console, code_to_events, prepare_reader
 from test.support import import_helper
-from _pyrepl.console import Event
-from _pyrepl.reader import Reader
+from repllib.console import Event
+from repllib.reader import Reader
 
 
 class TestReader(TestCase):

@@ -25,10 +25,10 @@ from .support import (
     clean_screen,
     make_clean_env,
 )
-from _pyrepl.console import Event
-from _pyrepl.readline import (ReadlineAlikeReader, ReadlineConfig,
+from repllib.console import Event
+from repllib.readline import (ReadlineAlikeReader, ReadlineConfig,
                               _ReadlineWrapper)
-from _pyrepl.readline import multiline_input as readline_multiline_input
+from repllib.readline import multiline_input as readline_multiline_input
 
 try:
     import pty
@@ -875,7 +875,7 @@ class TestPyReplCompleter(TestCase):
         output = multiline_input(reader, namespace)
         self.assertEqual(output, "os.")
 
-    @patch("_pyrepl.readline._ReadlineWrapper.get_reader")
+    @patch("repllib.readline._ReadlineWrapper.get_reader")
     @patch("sys.stderr", new_callable=io.StringIO)
     def test_completion_with_warnings(self, mock_stderr, mock_get_reader):
         class Dummy:

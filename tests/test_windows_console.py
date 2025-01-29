@@ -14,8 +14,8 @@ from unittest.mock import MagicMock, call
 from .support import handle_all_events, code_to_events
 
 try:
-    from _pyrepl.console import Event, Console
-    from _pyrepl.windows_console import (
+    from repllib.console import Event, Console
+    from repllib.windows_console import (
         WindowsConsole,
         MOVE_LEFT,
         MOVE_RIGHT,
