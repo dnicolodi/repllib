@@ -1,3 +1,5 @@
+import contextlib
+import functools
 import os
 from code import InteractiveConsole
 from functools import partial
@@ -166,3 +168,28 @@ class FakeConsole(Console):
 
     def repaint(self) -> None:
         pass
+
+
+@contextlib.contextmanager
+def no_color():
+    from repllib import _colorize
+    from test.support.os_helper import EnvironmentVarGuard
+    from test.support import swap_attr
+
+    with (
+        swap_attr(_colorize, "can_colorize", lambda file=None: False),
+        EnvironmentVarGuard() as env,
+    ):
+        for var in {"FORCE_COLOR", "NO_COLOR", "PYTHON_COLORS"}:
+            env.unset(var)
+        env.set("NO_COLOR", "1")
+        yield
+
+
+def force_not_colorized(func):
+    """Force the terminal not to be colorized."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        with no_color():
+            return func(*args, **kwargs)
+    return wrapper

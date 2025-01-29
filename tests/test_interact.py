@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 from textwrap import dedent
 
-from test.support import force_not_colorized
+from .support import force_not_colorized
 
 from repllib.console import InteractiveColoredConsole
 from repllib.simple_interact import _more_lines

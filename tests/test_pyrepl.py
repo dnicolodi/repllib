@@ -10,7 +10,7 @@ import sys
 import tempfile
 from unittest import TestCase, skipUnless, skipIf
 from unittest.mock import patch
-from test.support import force_not_colorized
+from .support import force_not_colorized
 from test.support import SHORT_TIMEOUT
 from test.support.import_helper import import_module
 from test.support.os_helper import unlink
