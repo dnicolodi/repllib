@@ -32,8 +32,22 @@ import warnings
 from dataclasses import dataclass, field
 
 import os
-from site import gethistoryfile   # type: ignore[attr-defined]
 import sys
+
+try:
+    from site import gethistoryfile   # type: ignore[attr-defined]
+except ImportError:
+    def gethistoryfile():
+        """Check if the PYTHON_HISTORY environment variable is set and define
+        it as the .python_history file.  If PYTHON_HISTORY is not set, use the
+        default .python_history file.
+        """
+        if not sys.flags.ignore_environment:
+            history = os.environ.get("PYTHON_HISTORY")
+            if history:
+                return history
+        return os.path.join(os.path.expanduser('~'), '.python_history')
+
 from rlcompleter import Completer as RLCompleter
 
 from . import commands, historical_reader
