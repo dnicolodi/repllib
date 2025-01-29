@@ -19,7 +19,7 @@
 
 from __future__ import annotations
 
-import _colorize  # type: ignore[import-not-found]
+from . import _colorize  # type: ignore[import-not-found]
 
 from abc import ABC, abstractmethod
 import ast
